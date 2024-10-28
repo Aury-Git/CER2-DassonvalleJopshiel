@@ -1,0 +1,21 @@
+{% extends 'index.html'%}
+
+{% block navbar %}{% endblock%} 
+{% block main %}{% endblock%}
+{% block descripcion %}{% endblock%}
+
+
+{% block b%}
+<h3> Carrito de Compras </h3>
+  
+<ul>
+    {% for item in carrito_items %}
+        <li>
+            {{ item.producto.nombre }} - Cantidad: {{ item.canitdad_producto }} - Precio: {{ item.producto.precio }}
+        </li>
+    {% endfor %}
+
+    <h3>Total: ${{ total }}</h3>
+
+</ul>
+{% endblock%}

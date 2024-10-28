@@ -1,0 +1,165 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Certamen2</title>
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+    <!--  CSS -->
+    <link rel="stylesheet" href="{% static 'css/estilo.css' %}" />
+</head>
+<body>
+
+    <!-- bloque del navbar-->
+    {% block navbar %}
+    <header class="bg-light p-3 ">
+        <nav class="navbar navbar-expand-lg navbar-light container">
+          <a class="navbar-brand" href="#">Society Ecology</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item"><a class="nav-link" href="{% url 'inicio' %}" data-section="menu">Inicio</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'productos'%}" data-section="solicitud">Productos</a></li>
+
+                {% if request.user.is_authenticated  %}
+                    <li class="nav-item"><a class="nav-link" href="{% url 'carrito' %}" data-section="catalogo">Carrito de Compras</a></li>
+                    <li class="nav-item"><a class="nav-link" href="http://127.0.0.1:8000/admin/" data-section="catalogo">Admin</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'exit' %}" data-section="catalogo">Salir de la Cuenta</a></li>
+                {% else %}
+                    <li class="nav-item"><a class="nav-link" href="{% url 'login' %}" data-section="catalogo">Iniciar Secion</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'register' %}" data-section="catalogo">Registrarse</a></li>
+                {% endif %}
+            </ul>
+          </div>
+        </nav>
+    </header>
+    {% endblock %}
+    <!-- fin del navbar-->
+
+    <!-- Inicio del bloque main -->
+    {% block main %}
+    <main class="container my-5">
+        
+        <!-- slider -->
+        <section id="menu" class="section mb-5">
+          <h1 class="text-center mb-4">¿Quiénes somos?</h1>
+          
+          <!-- Slider de imágenes -->
+          <div id="carouselExampleCaptions" class="carousel slide">
+            <div class="carousel-indicators">
+              <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+              <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
+              <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
+            </div>
+            
+            <div class="carousel-inner">
+              <div class="carousel-item active">
+                <img src="{% static 'imagenes/img1.jpg' %}" class="d-block w-100" alt="personas trabajando">
+              </div>
+              <div class="carousel-item">
+                <img src="{% static 'imagenes/img2.jpg' %}" class="d-block w-100" alt="un planeta ecologico">
+              </div>
+              <div class="carousel-item">
+                <img src="{% static 'imagenes/img3.jpg' %}" class="d-block w-100" alt="Un mundo limpio">
+              </div>
+            </div>
+    
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Next</span>
+            </button>
+          </div>
+      
+          <!-- Contenedor de texto sincronizado con el slider -->
+          <div id="carouselText" class="text-center mt-4" style="color: black;">
+            <h3>Lorab amet esse nam libero autem animi fugiat, veniam nulla odio cupiditate atque ad quisquam alias beatae quidem quis accusamus! Esse assumenda maxime, voluptate fuga perspiciatis voluptatibus deleniti ipsa</h3>
+          </div>
+        </section>
+        <!-- fin del slider -->
+         
+          
+        <!-- Productos Destacados -->
+        <section id="catalogo" class="section">
+            <h2 class="text-center mb-4">Productos Destacados</h2>
+            <div class="row">
+                {% for producto in productos %}
+                    {% if producto.favorito %}
+                    <div class="col-12 col-md-6 col-lg-4 mb-4">
+                        <div class="product-container">
+                            <div class="product-card">
+                                <!-- IMAGEN -->
+                                <img src="{{ producto.imagen.url }}" alt="{{ producto.nombre }}">
+                                <div class="product-body">
+                                    <!-- TITULO -->
+                                    <h5 class="product-title">{{ producto.nombre }}</h5>
+                                    <!-- DESCRIPCION -->
+                                    <p class="product-description"> {{ producto.descripcion }} </p>
+                                </div>
+                                <div class="product-footer">
+                                    <!-- PRECIO -->
+                                    <span class="product-price fw-bold">{{ producto.precio }}</span>
+                                    <a href="{% url 'agregar_producto' producto.id %}" class="btn btn-primary">Comprar</a>
+                                    <a href="{% url 'eliminar_producto' producto.id %}" class="btn btn-danger btn-sm">Eliminar</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </section>
+        
+    </main>
+    {% endblock %}
+    <!-- fin del bloque main -->
+    
+
+
+
+
+    {%block b%}{%endblock%}
+
+
+
+
+
+
+
+
+
+
+    <!-- Custom JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
+    {% block descripcion %}
+    <script>
+
+        // Textos para cada imagen del slider
+        const texts = [
+            "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quaerat sint et, adipisci, ipsum vero tenetur tempore tempora dicta aliquid eum illo impedit ex quisquam ipsam suscipit temporibus optio rem ipsa.",
+            "Lorem, ipsum dolor sit amet consectetur adipisicing elit. At ex deserunt similique nihil eligendi aliquid, minima asperiores excepturi expedita, sapiente nemo, commodi nulla odio nobis. Enim rerum natus tenetur explicabo?",
+            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Et, praesentium reiciendis debitis tempore optio doloribus vel exercitationem, deleniti accusantium voluptatum odio? Doloremque, amet illo voluptate fuga quibusdam atque harum quis."
+        ];
+    
+        // Elemento de texto que muestra la descripción
+        const carouselText = document.getElementById("carouselText");
+    
+        // Seleccionar el slider
+        const carousel = document.getElementById('carouselExampleCaptions');
+        carousel.addEventListener('slid.bs.carousel', function (event) {
+            const activeIndex = event.to; // Índice de la diapositiva activa
+            carouselText.innerHTML = `<h3>${texts[activeIndex]}</h3>`;
+        });
+    </script>
+    {% endblock %}
+</body>
+</html>

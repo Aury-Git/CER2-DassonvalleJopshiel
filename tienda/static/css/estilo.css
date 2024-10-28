@@ -1,0 +1,146 @@
+/* Importa una fuente moderna */
+@import url('https://fonts.googleapis.com/css2?family=SUSE:wght@400;700&display=swap');
+
+/* Estilos globales */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "SUSE", sans-serif;
+}
+
+/* Contenedor Principal */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 15px;
+}
+
+/* Estilos del Header y Navbar */
+header {
+    background-color: #70E000;
+}
+
+.navbar-brand {
+    font-weight: bold;
+    color: #004b23;
+}
+
+.navbar-nav .nav-link {
+    color: #004b23;
+    font-weight: 500;
+}
+
+.navbar-nav .nav-link:hover {
+    color: #DB241B;
+}
+
+/* Sección de Productos Destacados */
+.products {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: space-around;
+}
+
+.card {
+    flex: 1 1 calc(33.333% - 20px);
+    margin: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    overflow: hidden;
+    transition: transform 0.2s ease;
+}
+
+.card img {
+    width: 100%;
+    height: auto;
+}
+
+.card:hover {
+    transform: scale(1.05);
+}
+
+/* Media Queries para dispositivos móviles */
+@media (max-width: 991px) {
+    .card {
+        flex: 1 1 calc(50% - 20px);
+    }
+}
+
+@media (max-width: 767px) {
+    .card {
+        flex: 1 1 calc(100% - 20px);
+    }
+
+    .navbar-nav {
+        text-align: center;
+    }
+}
+
+/* Ajustes de la altura del carrusel en pantallas grandes */
+.carousel-item img {
+    height: 500px;
+    object-fit: cover;
+}
+
+/* Colores personalizados para los indicadores */
+.carousel-indicators [data-bs-target] {
+    background-color: #004b23;
+}
+
+.carousel-indicators .active {
+    background-color: #DB241B;
+}
+
+/* footer */ 
+
+.card-footer {
+    background-color: #f8f9fa; /* Fondo gris claro */
+    border-top: 1px solid #ddd;
+}
+
+.card-footer .btn {
+    background-color: #004b23;
+    border-color: #004b23;
+}
+
+.card-footer .btn:hover {
+    background-color: #DB241B;
+    border-color: #DB241B;
+}
+
+
+/* para que sea en serie */
+
+/* Contenedor de productos */
+.product-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 16px; /* Espacio entre las tarjetas */
+    padding: 16px;
+}
+
+/* Tarjeta de producto */
+.product-card {
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    padding: 16px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.product-card img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+}
+
+.product-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: auto;
+}

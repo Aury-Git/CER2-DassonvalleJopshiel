@@ -1,0 +1,47 @@
+{% extends 'index.html'%}
+
+{% block navbar %}{% endblock%} 
+{% block main %}{% endblock%}
+{% block descripcion %}{% endblock%}
+
+
+{% block b%}
+<h3> Productos </h3>
+
+
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+
+    <!-- Formulario para crear un nuevo producto -->
+    {{ form.as_p }}
+    <button type="submit">Guardar</button>
+
+    <main class="container my-5">
+        {% for producto in productos %}
+            <div class="product-container">
+                <div class="product-card">
+                    <!-- IMAGEN -->
+                    <img src="{{ producto.imagen.url }}" alt="{{ producto.nombre }}">
+                    <div class="product-body">
+                        <!-- TITULO -->
+                        <h5 class="product-title">{{ producto.nombre }}</h5>
+                        <!-- DESCRIPCION -->
+                        <p class="product-description"> {{ producto.descripcion }} </p>
+                    </div>
+                    <div class="product-footer">
+                        <!-- PRECIO -->
+                        <span class="product-price fw-bold">{{ producto.precio }}</span>
+                        <a href="#" class="btn btn-primary">Comprar</a>
+                    </div>
+                </div>
+
+            <!-- Puedes añadir más tarjetas de producto usando esta misma estructura -->
+            </div>
+        {% endfor %}
+    </main> 
+
+
+
+</form>
+{% endblock%}
+
